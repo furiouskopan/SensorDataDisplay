@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #be209f;
+    margin: 20px;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  #sensorData {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .sensor-item {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  .sensor-label {
+    font-weight: bold;
+  }
+  .waiting {
+    color: #888;
+  }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sensor Data</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #sensorData {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .sensor-item {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .sensor-label {
+      font-weight: bold;
+    }
+    .waiting {
+      color: #888;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+      socket.on('sensor_data', function(data) {
+        document.getElementById('aqiValue').innerHTML = '<span class="sensor-label">AQI Value:</span> ' + data.aqi_value;
+        document.getElementById('accelX').innerHTML = '<span class="sensor-label">X:</span> ' + data.x;
+        document.getElementById('accelY').innerHTML = '<span class="sensor-label">Y:</span> ' + data.y;
+        document.getElementById('accelZ').innerHTML = '<span class="sensor-label">Z:</span> ' + data.z;
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="sensorData">
+    <h1>Sensor Data</h1>
+    <p id="aqiValue" class="sensor-item waiting">Waiting for AQI data...</p>
+    <p id="accelX" class="sensor-item waiting">X: Waiting for accelerometer data...</p>
+    <p id="accelY" class="sensor-item waiting">Y: Waiting for accelerometer data...</p>
+    <p id="accelZ" class="sensor-item waiting">Z: Waiting for accelerometer data...</p>
+  </div>
+</body>
+</html>
