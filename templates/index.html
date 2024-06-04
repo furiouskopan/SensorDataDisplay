@@ -43,6 +43,17 @@
         document.getElementById('accelY').innerHTML = '<span class="sensor-label">Y:</span> ' + data.y;
         document.getElementById('accelZ').innerHTML = '<span class="sensor-label">Z:</span> ' + data.z;
       });
+
+      fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+          var historicalData = document.getElementById('historicalData');
+          data.forEach(item => {
+            var p = document.createElement('p');
+            p.innerText = `Timestamp: ${item.timestamp}, AQI: ${item.aqi_value}, X: ${item.accel_x}, Y: ${item.accel_y}, Z: ${item.accel_z}`;
+            historicalData.appendChild(p);
+          });
+        });
     });
   </script>
 </head>
@@ -53,6 +64,10 @@
     <p id="accelX" class="sensor-item waiting">X: Waiting for accelerometer data...</p>
     <p id="accelY" class="sensor-item waiting">Y: Waiting for accelerometer data...</p>
     <p id="accelZ" class="sensor-item waiting">Z: Waiting for accelerometer data...</p>
+    <canvas id="aqiChart"></canvas>
+  </div>
+  <div id="historicalData">
+    <h2>Historical Data</h2>
   </div>
 </body>
 </html>
